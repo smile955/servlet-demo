@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/index.css">
+    <title>哈哈哈</title>
+</head>
+<body>
+<div id="div_container">
+    <div id="div_fruit_list">
+        <p class="center">欢迎使用水果库存储系统后台管理系统</p>
+        <table id="tbl_fruit">
+            <tr>
+                <th class="w20">名称</th>
+                <th class="w20">单价</th>
+                <th class="w20">库存</th>
+                <th>操作</th>
+            </tr>
+            <!--            if
+                            unless
+                            ${#lists.isEmpty(session.fruitList) thymeleaf里的语句 表示这个是否为空
+            -->
+            <tr th:if="${#lists.isEmpty(session.fruitList)}">
+                <td colspan="4">对不起,库存为空!</td>
+            </tr>
+
+            <tr th:if="${!#lists.isEmpty(session.fruitList)}" th:each="fruit: ${session.fruitList}">
+                <!--  遍历出每一个元素的名字:${要遍历的集合} -->
+                <!--                <td><a th:text="${fruit.fname}" th:href="@{'/edit.do?fid='+fruit.fid}" >苹果</a></td>-->
+                <td><a th:text="${fruit.fname}" th:href="@{/edit.do(fid=${fruit.fid})}">苹果</a></td>
+                <td th:text="${fruit.price}">5</td>
+                <td th:text="${fruit.fcount}">20</td>
+                <td><img src="imgs/del.jpg" class="delImg"/></td>
+            </tr>
+        </table>
+        <hr/>
+    </div>
+</div>
+</body>
+</html>
